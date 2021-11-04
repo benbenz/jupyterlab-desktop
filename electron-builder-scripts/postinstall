@@ -20,4 +20,10 @@ mv "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia
 "$2/JupyterLab.app/Contents/Resources/jlab_server/bin/python" -m stata_kernel.install --prefix "$2/JupyterLab.app/Contents/Resources/jlab_server"
 
 
+# SETUP ENV variables ? (not working)
+mkdir -p "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/activate.d"
+mkdir -p "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/deactivate.d"
+echo -e "#!/bin/sh\n\nexport JULIA_DEPOT_PATH='~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot'" > "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/activate.d/env_vars.sh"
+echo -e "#!/bin/sh\n\nunset JULIA_DEPOT_PATH" > "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/deactivate.d/env_vars.sh"
+
 exit 0
