@@ -1,0 +1,210 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf840
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AndaleMono;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red47\green255\blue18;\red0\green0\blue0;\red27\green31\blue35;
+\red70\green137\blue204;\red23\green23\blue23;\red202\green202\blue202;\red194\green126\blue101;\red0\green0\blue0;
+\red255\green255\blue255;\red89\green138\blue67;\red140\green211\blue254;\red212\green214\blue154;}
+{\*\expandedcolortbl;;\cssrgb\c15686\c99608\c7843;\csgray\c0\c90000;\cssrgb\c14118\c16078\c18431;
+\cssrgb\c33725\c61176\c83922;\cssrgb\c11765\c11765\c11765;\cssrgb\c83137\c83137\c83137;\cssrgb\c80784\c56863\c47059;\cssrgb\c0\c0\c0\c87059;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c41569\c60000\c33333;\cssrgb\c61176\c86275\c99608;\cssrgb\c86275\c86275\c66667;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 Build and Package JupyterLab App with SoS + Julia + State:
+\b0 \
+\
+Follow: https://github.com/jupyterlab/jupyterlab-desktop#build-dependencies\
+Use \'93-p ../jlab_server when setting server env ..\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 ./env_installer/JupyterLabDesktopAppServer-3.1.18-1-MacOSX-x86_64.sh -p ../jlab_server
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+
+\b Add the packages in JupyterLab App: https://vatlab.github.io/sos-docs/running.html\
+
+\b0 \
+conda install -c conda-forge sos\
+conda install -c conda-forge sos-notebook jupyterlab-sos sos-papermill\
+conda install -c conda-forge sos-bash sos-python\
+conda install julia\
+conda install -c conda-forge/label/cf202003 sos-julia\
+\
+
+\b Package the jupyterLab App:\
+
+\b0 \
+Follow: https://github.com/jupyterlab/jupyterlab-desktop#building-for-distribution\
+\
+
+\b NOTE: 
+\b0 do not install node from conda \'85 if it is installed in the environment, better to remove it\
+Use the nom latest and use the global binary (with \'92n\'92 )\
+\
+Commands:\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f2 \cf4 \expnd0\expndtw0\kerning0
+yarn run clean && yarn build\
+yarn create_env_installer:<platform>\
+
+\f3\b yarn julia_depot
+\f2\b0 \
+yarn dist:<platform>
+\f0 \cf0 \kerning1\expnd0\expndtw0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+
+\b Pour packager des packages suppl\'e9mentaires dans la distribution JupyterLab:
+\b0 \
+\
+Modifier le fichier env_installer/construct.yaml et ajouter les conda-packages sous \'93specs\'94, par exemple:\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf5 \cb6 \expnd0\expndtw0\kerning0
+specs\cf7 :\cb1 \
+\cb6   - \cf8 conda\cf7 \cb1 \
+\cb6   - \cf8 ipywidgets 7.6.5\cf7 \cb1 \
+\cb6   - \cf8 jupyterlab 3.1.18\cf7 \cb1 \
+\cb6   - \cf8 matplotlib-base\cf7 \cb1 \
+\cb6   - \cf8 numpy\cf7 \cb1 \
+\cb6   - \cf8 pandas\cf7 \cb1 \
+\cb6   - \cf8 pip\cf7 \cb1 \
+\cb6   - \cf8 python 3.8*\cf7 \cb1 \
+\cb6   - \cf8 scipy\cf7 \cb1 \
+\cb6   - \cf8 sos\cf7 \cb1 \
+\cb6   - \cf8 sos-notebook\cf7 \cb1 \
+\cb6   - \cf8 jupyterlab-sos\cf7 \cb1 \
+\cb6   - \cf8 sos-papermill\cf7 \cb1 \
+\cb6   - \cf8 sos-bash\cf7 \cb1 \
+\cb6   - \cf8 sos-python\cf7 \cb1 \
+\cb6   - \cf8 julia\cf7 \cb1 \
+\cb6   - \cf8 sos-julia\cf7 \cb1 \
+\cb6   - \cf8 stata_kernel\cf7 \cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \
+\'91sos-stata\'92 must be install with pip but \'91constructor\'92 (used by the bundler of JupyterLab) doesn\'92t allow automatic handling of pip. \
+\
+We need to conda\'92ify sos-stata. In the directory holding jupyterlab-desktop source:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2 \cf0 conda skeleton pypi sos-stata\
+conda-build 
+\f3\b -c conda-forge
+\f2\b0  sos-stata\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 You will need sos and sos-notebook in your conda dev environment to do so \'85\
+(So you may need conda, conda-build, sos and sos-notebook minimally - hence jupyterlab as well)
+\f2 \
+\
+/*\
+Then,move the files to the local download:\
+\
+mkdir mycondachannel\
+mkdir mycondachannel/osx-64\
+mkdir mycondachannel/linux-64\
+mkdir mycondachannel/linux-32\
+mkdir mycondachannel/win-64\
+mkdir mycondachannel/win-32\
+\
+cp sos-stata/*.bz2 \
+conda index mycondachannel\
+*/\
+\
+
+\f0 You can now add the file to the env_installer/construct.yaml file:\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f2 \cf7 \cb6 \expnd0\expndtw0\kerning0
+  - \cf8 file:////Users/benben/opt/miniconda3/envs/stata+julia/conda-bld/osx-64/sos-stata-0.18.0-py38_0.tar.bz2\cf7 \cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \kerning1\expnd0\expndtw0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+Then follow again \'93Package JupyterLab App\'94 (https://github.com/jupyterlab/jupyterlab-desktop#building-for-distribution)
+\f2 \
+\
+
+\f0\b Install / Run
+\f2\b0 \
+
+\f0 \
+After install of the distrib - at startup - we still need to run in a terminal (in JupyterLab):\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2 \cf0 ~/Applications/JupyterLab.app/Contents/Resources/jlab_server/bin/python -m stata_kernel.install
+\fs27\fsmilli13600 \cf9 \cb10 \expnd0\expndtw0\kerning0
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+In order to setup stata_kernel \'85. If you don\'92t have Stats, this won\'92t work.\
+\
+Also need to install the IJulia Jupyter kernel:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2 \cf0 julia\
+julia> using Pkg\
+julia> Pkg.add(\'93IJulia\'94)\
+\
+\
+\
+\
+OR using the new post install (OS X):\
+\
+file \'91electron-builder-scripts/postinstall\'92\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb6 \expnd0\expndtw0\kerning0
+#!/bin/bash\cf7 \cb1 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8 \cb6 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/env_installer/JupyterLabDesktopAppServer-3.2.1-2-MacOSX-x86_64.sh"\cf7  -b -p \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server"\cf7 \cb1 \
+\
+\cb6 ln -s \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/app/jlab"\cf7  /usr/local/bin/jlab\cb1 \
+\cb6 chmod 755 \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/app/jlab"\cf7 \cb1 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb6 # INSTALL Jupyter JULIA KERNEL manually\cf7 \cb1 \
+\cf11 \cb6 ## 1) kernel files\cf7 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \cb6 cp -R \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kernels/julia"\cf7  \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/"\cf7 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb6 ## 2) IJulia ...\cf7 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \cb6 cp -R \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server-dist/julia"\cf7  \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server/"\cf7 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb6 ## 3) we had to remove the '-1.6' for julia (constructor was not copying the extraResources)... let's put it back\cf7 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \cb6 mv \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia"\cf7  \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia-1.6"\cf7 \cb1 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb6 # INSTALL Jupyter STATA KERNEL manually and handles STATA binding\cf7 \cb1 \
+\cf11 \cb6 # cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kernels/stata" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/"\cf7 \cb1 \
+\cf11 \cb6 # let's just use the normal command line to handle auto-configuration (this will add the kernel in ~/Library/Jupyter/kernels)\cf7 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8 \cb6 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server/bin/python"\cf7  -m stata_kernel.install --prefix \cf8 "\cf12 $2\cf8 /JupyterLab.app/Contents/Resources/jlab_server"\cf7 \cb1 \
+\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf13 \cb6 exit\cf7  0\cb1 \
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \kerning1\expnd0\expndtw0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \
+}
