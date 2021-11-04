@@ -1,0 +1,14 @@
+{
+  "display_name": "Julia 1.6.3",
+  "argv": [
+    "~/Applications/JupyterLab.app/Contents/Resources/jlab_server/bin/julia",
+    "-i",
+    "--color=yes",
+    "--project=@.",
+    "~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot/packages/IJulia/e8kqU/src/kernel.jl",
+    "{connection_file}"
+  ],
+  "language": "julia",
+  "env": {"JULIA_DEPOT_PATH":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot"},
+  "interrupt_mode": "signal"
+}

@@ -1,0 +1,1 @@
+{"argv": ["~/Applications/JupyterLab.app/Contents/Resources/jlab_server/bin/python", "-m", "stata_kernel", "-f", "{connection_file}"], "display_name": "Stata", "language": "stata"}

@@ -5,4 +5,19 @@
 ln -s "$2/JupyterLab.app/Contents/Resources/app/jlab" /usr/local/bin/jlab
 chmod 755 "$2/JupyterLab.app/Contents/Resources/app/jlab"
 
+# INSTALL Jupyter JULIA KERNEL manually
+## 1) kernel files
+cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kernels/julia" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/"
+## 2) julia depot ...
+mkdir "$2/JupyterLab.app/Contents/Resources/jlab_server/julia"
+cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/julia/depot" "$2/JupyterLab.app/Contents/Resources/jlab_server/julia"
+## 3) we had to remove the '-1.6' for julia (constructor was not copying the extraResources)... let's put it back
+mv "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia-1.6"
+
+# INSTALL Jupyter STATA KERNEL manually and handles STATA binding
+# cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kernels/stata" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/"
+# let's just use the normal command line to handle auto-configuration (this will add the kernel in ~/Library/Jupyter/kernels)
+"$2/JupyterLab.app/Contents/Resources/jlab_server/bin/python" -m stata_kernel.install --prefix "$2/JupyterLab.app/Contents/Resources/jlab_server"
+
+
 exit 0

@@ -24,3 +24,5 @@ __pycache__
 
 env_installer/
 !env_installer/construct.yaml
+
+jlab_server-dist/julia/depot

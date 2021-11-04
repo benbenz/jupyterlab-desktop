@@ -28,8 +28,26 @@ specs:
   - pip
   - python 3.8*
   - scipy
+  # added
+  - jupyter_contrib_nbextensions # required by SoS to pass data back and forth
+  - sos
+  - sos-notebook
+  - jupyterlab-sos
+  - sos-papermill
+  - sos-bash
+  - sos-python
+  - julia
+  - sos-julia
+  # it should avoid bug "Cannot import kernel. Installing Jupyter kernel spec" when running stata_kernel.install at startup
+  # this version (1.12.1) also handles well Stata not being installed and provides better feedback than 1.12.0
+  # 1.12.2 doesn't seem to work well
+  - stata_kernel 1.12.1
+  # from pypi > conda (using skeleton and conda-build)
+  - file:///Users/benben/opt/miniconda3/envs/stata+julia/conda-bld/osx-64/sos-stata-0.18.0-py38_0.tar.bz2
 
 default_prefix: "%HOMEDRIVE%\\JupyterLab\\resources\\jlab_server"
 default_prefix_all_users: "%HOMEDRIVE%\\JupyterLab\\resources\\jlab_server"
 
 register_python_default: false
+
+# post_install: "post_install.sh"
