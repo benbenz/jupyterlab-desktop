@@ -49,7 +49,9 @@
       "env_installer/JupyterLabDesktopAppServer-*[.sh,.exe]" ,
       "jlab_server-dist/share/jupyter/kernels/julia" ,
       "jlab_server-dist/share/jupyter/kernels/stata" ,
-      "jlab_server-dist/julia/depot" 
+      "jlab_server-dist/share/jupyter/kernels/sos" ,
+      "jlab_server-dist/julia/depot" ,
+      "jlab_server-dist/lib"
     ],
     "linux": {
       "target": [

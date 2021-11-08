@@ -1,0 +1,1 @@
+{"argv": ["~/Applications/JupyterLab.app/Contents/Resources/jlab_server/bin/python", "-m", "sos_notebook.kernel", "-f", "{connection_file}"], "display_name": "SoS", "language": "sos","env": {"JULIA_DEPOT_PATH":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot"}}

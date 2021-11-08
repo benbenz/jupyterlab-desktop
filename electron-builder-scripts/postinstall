@@ -16,11 +16,16 @@ cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/julia/depot" "$2/Ju
 # or you set supported_kernels = {'Julia': ['julia-?.?','julia']} ~line 208 of site-packages/sos-julia/kernel.py
 mv "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia-1.6"
 
+## add in fix for Julia Matrix handling
+cp "$2/jlab_server-dist/lib/python3.8/site-packages/sos_julia/kernel.py" "$2/JupyterLab.app/Contents/Resources/jlab_server/lib/python3.8/site-packages/sos_julia"
+
 # INSTALL Jupyter STATA KERNEL manually and handles STATA binding
 # cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kernels/stata" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/"
 # let's just use the normal command line to handle auto-configuration (this will add the kernel in ~/Library/Jupyter/kernels)
 "$2/JupyterLab.app/Contents/Resources/jlab_server/bin/python" -m stata_kernel.install --prefix "$2/JupyterLab.app/Contents/Resources/jlab_server"
 
+
+cp "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kernels/sos/kernel.json" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/sos"
 
 # SETUP ENV variables ? (not working)
 mkdir -p "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/activate.d"
