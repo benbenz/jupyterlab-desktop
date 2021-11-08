@@ -12,6 +12,8 @@ cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kerne
 mkdir "$2/JupyterLab.app/Contents/Resources/jlab_server/julia"
 cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/julia/depot" "$2/JupyterLab.app/Contents/Resources/jlab_server/julia"
 ## 3) we had to remove the '-1.6' for julia (constructor was not copying the extraResources)... let's put it back
+# THIS IS IMPORTANT: otherwise SoS-julia won't bind to IJulia (cf. %use showing "unavailable" language module)
+# or you set supported_kernels = {'Julia': ['julia-?.?','julia']} ~line 208 of site-packages/sos-julia/kernel.py
 mv "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia-1.6"
 
 # INSTALL Jupyter STATA KERNEL manually and handles STATA binding

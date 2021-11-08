@@ -26,3 +26,4 @@ env_installer/
 !env_installer/construct.yaml
 
 jlab_server-dist/julia/depot
+!jlab_server-dist/lib
