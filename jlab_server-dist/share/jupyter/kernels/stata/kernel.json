@@ -1,1 +1,9 @@
-{"argv": ["~/Applications/JupyterLab.app/Contents/Resources/jlab_server/bin/python", "-m", "stata_kernel", "-f", "{connection_file}"], "display_name": "Stata", "language": "stata","env": {"JULIA_DEPOT_PATH":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot"}}
+{
+    "argv": ["~/Applications/JupyterLab.app/Contents/Resources/jlab_server/bin/python", "-m", "stata_kernel", "-f", "{connection_file}"],
+    "display_name": "Stata",
+    "language": "stata",
+    "env": {
+        "JULIA_DEPOT_PATH":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot" ,
+        "JUPYTER_DATA_DIR":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter" 
+    }
+}

@@ -9,6 +9,9 @@
     "{connection_file}"
   ],
   "language": "julia",
-  "env": {"JULIA_DEPOT_PATH":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot"},
+  "env": {
+    "JULIA_DEPOT_PATH":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot",
+    "JUPYTER_DATA_DIR":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter" 
+  },
   "interrupt_mode": "signal"
 }
