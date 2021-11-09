@@ -17,7 +17,7 @@ cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/julia/depot" "$2/Ju
 mv "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/julia-1.6"
 
 ## add in fix for Julia Matrix handling
-cp "$2/jlab_server-dist/lib/python3.8/site-packages/sos_julia/kernel.py" "$2/JupyterLab.app/Contents/Resources/jlab_server/lib/python3.8/site-packages/sos_julia"
+cp "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/lib/python3.8/site-packages/sos_julia/kernel.py" "$2/JupyterLab.app/Contents/Resources/jlab_server/lib/python3.8/site-packages/sos_julia"
 
 # INSTALL Jupyter STATA KERNEL manually and handles STATA binding
 # cp -R "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kernels/stata" "$2/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter/kernels/"
