@@ -30,7 +30,7 @@ cp "$2/JupyterLab.app/Contents/Resources/jlab_server-dist/share/jupyter/kernels/
 # SETUP ENV variables ? (not working)
 mkdir -p "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/activate.d"
 mkdir -p "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/deactivate.d"
-echo -e "#!/bin/sh\n\nexport JULIA_DEPOT_PATH='~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot'" > "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/activate.d/env_vars.sh"
+echo -e "#!/bin/sh\n\nexport JULIA_DEPOT_PATH='$2/JupyterLab.app/Contents/Resources/jlab_server/julia/depot'" > "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/activate.d/env_vars.sh"
 echo -e "#!/bin/sh\n\nunset JULIA_DEPOT_PATH" > "$2/JupyterLab.app/Contents/Resources/jlab_server/etc/conda/deactivate.d/env_vars.sh"
 
 exit 0
