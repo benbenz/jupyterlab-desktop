@@ -1,0 +1,5 @@
+TODOs UI:
+x robust install (valid for /Applications)
+- auto-complete for stata (variables and functions)
+- SoS Menu: stata params, Julia params, auto complete etc.
+- display of images (stata)
