@@ -1,5 +1,5 @@
 {
-  "display_name": "Julia 1.6.3",
+  "display_name": "Julia 1.6.4",
   "argv": [
     "~/Applications/JupyterLab.app/Contents/Resources/jlab_server/bin/julia",
     "-i",
