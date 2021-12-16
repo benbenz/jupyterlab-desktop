@@ -45,6 +45,8 @@ if egrep -q '^stata_path.*=\s*$' ~/.stata_kernel.conf; then
         "$resdir/jlab_server/bin/python" -m stata_kernel.install --prefix "$resdir/jlab_server"
     fi
 fi
+## 3) add in fix for %help magic function with Stata17 (was crashing on the Copyright processing)
+cp "$resdir/jlab_server-dist/lib/python3.8/site-packages/stata_kernel/stata_magics.py" "$resdir/jlab_server/lib/python3.8/site-packages/stata_kernel"
 
 # III - INSTALL updated SoS kernel to include some ENV variables
 cp "$resdir/jlab_server-dist/share/jupyter/kernels/sos/kernel.json" "$resdir/jlab_server/share/jupyter/kernels/sos"

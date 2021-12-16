@@ -1,9 +1,9 @@
 TODOs UI:
 x robust install (valid for /Applications)
-- auto-complete for stata (variables and functions in State kernel and SoS kernel)
+x auto-complete for stata (variables and functions in State kernel and SoS kernel)
 - display of images (stata)
 - SoS Menu: stata params, Julia params, auto complete etc.
-- problem with state and auto-completion locking the kernel
+x problem with state and auto-completion locking the kernel
 ~ GR_jll building error on ‘yarn julia_depot’ (or in JupyterLab if Plot is not pre-installed and installed live …)
   in jlab_server run:
   > LD_LIBRARY_PATH=“” julia
