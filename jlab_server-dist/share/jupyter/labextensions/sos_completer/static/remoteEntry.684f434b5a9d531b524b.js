@@ -124,7 +124,7 @@ __webpack_require__.d(exports, {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + "." + {"lib_index_js":"9738d957e0dcb58c8a29","vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_cssW-72eba1":"5fdf20348298e23487d2","style_index_js":"0def88b54ac992a101af"}[chunkId] + ".js";
+/******/ 			return "" + chunkId + "." + {"lib_index_js":"51c28d2a460c7714425d","vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_cssW-72eba1":"5fdf20348298e23487d2","style_index_js":"0def88b54ac992a101af"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -407,6 +407,7 @@ __webpack_require__.d(exports, {
 /******/ 		var moduleToHandlerMapping = {
 /******/ 			"webpack/sharing/consume/default/@jupyterlab/completer": () => (loadSingletonVersionCheck("default", "@jupyterlab/completer", [1,3,2,5])),
 /******/ 			"webpack/sharing/consume/default/@jupyterlab/notebook": () => (loadSingletonVersionCheck("default", "@jupyterlab/notebook", [1,3,2,5])),
+/******/ 			"webpack/sharing/consume/default/@jupyterlab/console": () => (loadSingletonVersionCheck("default", "@jupyterlab/console", [1,3,2,5])),
 /******/ 			"webpack/sharing/consume/default/@jupyterlab/statedb": () => (loadSingletonVersionCheck("default", "@jupyterlab/statedb", [1,3,2,5]))
 /******/ 		};
 /******/ 		// no consumes in initial chunks
@@ -414,6 +415,7 @@ __webpack_require__.d(exports, {
 /******/ 			"lib_index_js": [
 /******/ 				"webpack/sharing/consume/default/@jupyterlab/completer",
 /******/ 				"webpack/sharing/consume/default/@jupyterlab/notebook",
+/******/ 				"webpack/sharing/consume/default/@jupyterlab/console",
 /******/ 				"webpack/sharing/consume/default/@jupyterlab/statedb"
 /******/ 			]
 /******/ 		};
@@ -546,4 +548,4 @@ __webpack_require__.d(exports, {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=remoteEntry.dc53c09ffb4b0ec20c14.js.map
+//# sourceMappingURL=remoteEntry.684f434b5a9d531b524b.js.map

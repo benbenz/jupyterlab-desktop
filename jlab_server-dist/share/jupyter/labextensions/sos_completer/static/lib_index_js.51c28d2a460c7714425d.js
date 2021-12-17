@@ -105,10 +105,12 @@ class CustomConnector extends _jupyterlab_statedb__WEBPACK_IMPORTED_MODULE_0__.D
      *
      * @param options - The instatiation options for the custom connector.
      */
-    constructor(options) {
+    constructor(options, notebooks, consoles) {
         super();
         this._editor = options.editor;
         this._options = options;
+        this._notebooks = notebooks;
+        this._consoles = consoles;
     }
     /**
      * Fetch completion requests.
@@ -121,7 +123,7 @@ class CustomConnector extends _jupyterlab_statedb__WEBPACK_IMPORTED_MODULE_0__.D
             return Promise.reject('No editor');
         }
         return new Promise((resolve) => {
-            resolve(Private.completionHint(this._editor, this._options));
+            resolve(Private.completionHint(this._editor, this._options, this._notebooks, this._consoles));
         });
     }
 }
@@ -136,13 +138,20 @@ var Private;
      * @param editor Editor
      * @returns Completion reply
      */
-    function completionHint(editor, options) {
+    function completionHint(editor, options, notebooks, consoles) {
         // Find the token at the cursor
         const cursor = editor.getCursorPosition();
         const token = editor.getTokenForPosition(cursor);
         let cur_kernel = options.sessionCtx.kernelPreference.name ||
             options.sessionCtx.kernelDisplayName;
         cur_kernel = cur_kernel.toLowerCase();
+        if (cur_kernel === "sos") {
+            // SoS mode: kernel is at the cell level 
+            let cell = notebooks.activeCell;
+            let cellk = cell.model.metadata.get("kernel");
+            if (cellk)
+                cur_kernel = cellk.toString().toLowerCase();
+        }
         // Create a list of matching tokens.
         // const tokenList = [
         //   { value: token.value + 'Magic', offset: token.offset, type: 'magic' },
@@ -1949,8 +1958,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jupyterlab_completer__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_jupyterlab_completer__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jupyterlab_notebook__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jupyterlab/notebook */ "webpack/sharing/consume/default/@jupyterlab/notebook");
 /* harmony import */ var _jupyterlab_notebook__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jupyterlab_notebook__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _connector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./connector */ "./lib/connector.js");
-/* harmony import */ var _customconnector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./customconnector */ "./lib/customconnector.js");
+/* harmony import */ var _jupyterlab_console__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jupyterlab/console */ "webpack/sharing/consume/default/@jupyterlab/console");
+/* harmony import */ var _jupyterlab_console__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_jupyterlab_console__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _connector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./connector */ "./lib/connector.js");
+/* harmony import */ var _customconnector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./customconnector */ "./lib/customconnector.js");
+
 
 
 
@@ -1971,8 +1983,8 @@ var CommandIDs;
 const extension = {
     id: 'sos_completer',
     autoStart: true,
-    requires: [_jupyterlab_completer__WEBPACK_IMPORTED_MODULE_0__.ICompletionManager, _jupyterlab_notebook__WEBPACK_IMPORTED_MODULE_1__.INotebookTracker],
-    activate: async (app, completionManager, notebooks) => {
+    requires: [_jupyterlab_completer__WEBPACK_IMPORTED_MODULE_0__.ICompletionManager, _jupyterlab_notebook__WEBPACK_IMPORTED_MODULE_1__.INotebookTracker, _jupyterlab_console__WEBPACK_IMPORTED_MODULE_2__.IConsoleTracker],
+    activate: async (app, completionManager, notebooks, consoles) => {
         console.log('JupyterLab custom completer extension is activated!');
         // Modelled after completer-extension's notebooks plugin
         notebooks.widgetAdded.connect((sender, panel) => {
@@ -1981,7 +1993,7 @@ const extension = {
             const session = panel.sessionContext.session;
             const sessionCtx = panel.sessionContext;
             const options = { session, sessionCtx, editor };
-            const connector = new _connector__WEBPACK_IMPORTED_MODULE_2__.CompletionConnector([]);
+            const connector = new _connector__WEBPACK_IMPORTED_MODULE_3__.CompletionConnector([]);
             const handler = completionManager.register({
                 connector,
                 editor,
@@ -1996,20 +2008,20 @@ const extension = {
                 handler.editor = editor;
                 const kernel = new _jupyterlab_completer__WEBPACK_IMPORTED_MODULE_0__.KernelConnector(options);
                 const context = new _jupyterlab_completer__WEBPACK_IMPORTED_MODULE_0__.ContextConnector(options);
-                const custom = new _customconnector__WEBPACK_IMPORTED_MODULE_3__.CustomConnector(options);
+                const custom = new _customconnector__WEBPACK_IMPORTED_MODULE_4__.CustomConnector(options, notebooks, consoles);
                 let cur_kernel = panel.context.sessionContext.kernelPreference.name ||
                     panel.context.sessionContext.kernelDisplayName;
                 // let's skip the KernelConnector for Stata (this seems to lock the kernel)
                 // @TODO: implement auto-completion from within stata_kernel
                 if (cur_kernel.toLowerCase() === "stata") {
-                    handler.connector = new _connector__WEBPACK_IMPORTED_MODULE_2__.CompletionConnector([
+                    handler.connector = new _connector__WEBPACK_IMPORTED_MODULE_3__.CompletionConnector([
                         kernel,
                         context,
                         custom,
                     ]);
                 }
                 else {
-                    handler.connector = new _connector__WEBPACK_IMPORTED_MODULE_2__.CompletionConnector([
+                    handler.connector = new _connector__WEBPACK_IMPORTED_MODULE_3__.CompletionConnector([
                         kernel,
                         context,
                         custom,
@@ -2053,4 +2065,4 @@ const extension = {
 /***/ })
 
 }]);
-//# sourceMappingURL=lib_index_js.9738d957e0dcb58c8a29.js.map
+//# sourceMappingURL=lib_index_js.51c28d2a460c7714425d.js.map

@@ -52,6 +52,7 @@
     "@jupyterlab/completer": "^3.1.0",
     "@jupyterlab/launcher": "^3.1.0",
     "@jupyterlab/notebook": "^3.1.0",
+    "@jupyterlab/console": "^3.1.0",
     "@jupyterlab/outputarea": "^3.1.0",
     "@jupyterlab/statedb": "^3.1.0",
     "@jupyterlab/translation": "^3.1.0",
@@ -88,7 +89,7 @@
       "@jupyterlab/completer-extension:notebooks"
     ],
     "_build": {
-      "load": "static/remoteEntry.dc53c09ffb4b0ec20c14.js",
+      "load": "static/remoteEntry.684f434b5a9d531b524b.js",
       "extension": "./extension",
       "style": "./style"
     }
