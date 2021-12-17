@@ -60,7 +60,7 @@ appdir_esc=${appdir//\//\\/} # escaped Application Directory for regex replaceme
 find $resdir/jlab_server/share/jupyter/kernels -name kernel.json -type f -exec sed -i '.bak' "s/~\/Applications\/JupyterLab\.app/$appdir_esc/g" {} \;
 
 # V  - Install sos_completer lab extension
-cp "$resdir/jlab_server-dist/share/jupyter/labextensions/sos_completer" "$resdir/jlab_server/share/jupyter/labextensions"
+cp -R "$resdir/jlab_server-dist/share/jupyter/labextensions/sos_completer" "$resdir/jlab_server/share/jupyter/labextensions"
 
 # VI - SETUP ENV variables ? (not working)
 mkdir -p "$resdir/jlab_server/etc/conda/activate.d"
