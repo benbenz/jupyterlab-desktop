@@ -45,8 +45,10 @@ if egrep -q '^stata_path.*=\s*$' ~/.stata_kernel.conf; then
         "$resdir/jlab_server/bin/python" -m stata_kernel.install --prefix "$resdir/jlab_server"
     fi
 fi
-## 3) add in fix for %help magic function with Stata17 (was crashing on the Copyright processing)
-cp "$resdir/jlab_server-dist/lib/python3.8/site-packages/stata_kernel/stata_magics.py" "$resdir/jlab_server/lib/python3.8/site-packages/stata_kernel"
+## 3) add in fixes:
+##    - %help magic function with Stata17 (was crashing on the Copyright processing)
+##    - graphics not displaying
+cp "$resdir/jlab_server-dist/lib/python3.8/site-packages/stata_kernel/*.py" "$resdir/jlab_server/lib/python3.8/site-packages/stata_kernel"
 
 # III - INSTALL updated SoS kernel to include some ENV variables
 cp "$resdir/jlab_server-dist/share/jupyter/kernels/sos/kernel.json" "$resdir/jlab_server/share/jupyter/kernels/sos"
@@ -57,8 +59,10 @@ appdir_esc=${appdir//\//\\/} # escaped Application Directory for regex replaceme
 # replace '~/Applications/JupyterLab.app' with the actual install directory in manually installed kernel.json files
 find $resdir/jlab_server/share/jupyter/kernels -name kernel.json -type f -exec sed -i '.bak' "s/~\/Applications\/JupyterLab\.app/$appdir_esc/g" {} \;
 
+# V  - Install sos_completer lab extension
+cp "$resdir/jlab_server-dist/share/jupyter/labextensions/sos_completer" "$resdir/jlab_server/share/jupyter/labextensions"
 
-# V - SETUP ENV variables ? (not working)
+# VI - SETUP ENV variables ? (not working)
 mkdir -p "$resdir/jlab_server/etc/conda/activate.d"
 mkdir -p "$resdir/jlab_server/etc/conda/deactivate.d"
 echo -e "#!/bin/sh\n\nexport JULIA_DEPOT_PATH='$resdir/jlab_server/julia/depot'" > "$resdir/jlab_server/etc/conda/activate.d/env_vars.sh"

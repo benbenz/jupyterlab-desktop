@@ -1,0 +1,14 @@
+{
+  "title": "SoS Kernel Completer",
+  "description": "SoS kernel completer settings.",
+  "jupyter.lab.shortcuts": [
+    {
+      "command": "sos_completer:invoke-notebook",
+      "keys": ["Tab"],
+      "selector": ".jp-Notebook.jp-mod-editMode .jp-mod-completer-enabled"
+    }
+  ],  
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}
