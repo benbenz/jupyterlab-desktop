@@ -18,3 +18,6 @@ Pkg.add(Pkg.PackageSpec(;name="Plots", version="1.1.0"))
 
 # precompile the packages ? 
 Pkg.precompile()
+
+using Plots
+using IJulia
