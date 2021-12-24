@@ -61,6 +61,8 @@ find $resdir/jlab_server/share/jupyter/kernels -name kernel.json -type f -exec s
 
 # V  - Install sos_completer lab extension
 cp -R "$resdir/jlab_server-dist/share/jupyter/labextensions/sos_completer" "$resdir/jlab_server/share/jupyter/labextensions"
+#cp -R "$resdir/jlab_server-dist/share/jupyter/labextensions/sos_completer/schemas/sos_completer" "$resdir/jlab_server/share/jupyter/lab/schemas/"
+#mv $resdir/jlab_server/share/jupyter/lab/schemas/sos_completer $resdir/jlab_server/share/jupyter/lab/schemas/sos_completer-extension
 
 # VI - SETUP ENV variables ? (not working)
 mkdir -p "$resdir/jlab_server/etc/conda/activate.d"
