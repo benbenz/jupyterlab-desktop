@@ -36,7 +36,7 @@ specs:
   - sos-papermill
   - sos-bash
   - sos-python
-  - julia 1.6.4 # you can change the version and then run a yarn:julia_depot (or you will have errors at runtime causing the kernel to shutdown)
+  - julia 1.6.5 # you can change the version and then run a yarn:julia_depot (or you will have errors at runtime causing the kernel to shutdown)
   - sos-julia
   # it should avoid bug "Cannot import kernel. Installing Jupyter kernel spec" when running stata_kernel.install at startup
   # this version (1.12.1) also handles well Stata not being installed and provides better feedback than 1.12.0

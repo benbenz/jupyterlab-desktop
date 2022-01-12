@@ -70,4 +70,7 @@ mkdir -p "$resdir/jlab_server/etc/conda/deactivate.d"
 echo -e "#!/bin/sh\n\nexport JULIA_DEPOT_PATH='$resdir/jlab_server/julia/depot'" > "$resdir/jlab_server/etc/conda/activate.d/env_vars.sh"
 echo -e "#!/bin/sh\n\nunset JULIA_DEPOT_PATH" > "$resdir/jlab_server/etc/conda/deactivate.d/env_vars.sh"
 
+# VII - finishes Interact.jl install
+
+
 exit 0
