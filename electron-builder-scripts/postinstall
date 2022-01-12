@@ -71,6 +71,6 @@ echo -e "#!/bin/sh\n\nexport JULIA_DEPOT_PATH='$resdir/jlab_server/julia/depot'"
 echo -e "#!/bin/sh\n\nunset JULIA_DEPOT_PATH" > "$resdir/jlab_server/etc/conda/deactivate.d/env_vars.sh"
 
 # VII - finishes Interact.jl install
-
+#$resdir/bin/julia "$resdir/jlab_server-dist/julia/install_more.jl" "$resdir/bin/jupyter"
 
 exit 0

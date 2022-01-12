@@ -16,8 +16,13 @@ Pkg.add("Conda")
 ENV["JULIA_GR_PROVIDER"] = "GR" 
 Pkg.add(Pkg.PackageSpec(;name="Plots", version="1.1.0"))
 
+Pkg.add("Interact")
+Pkg.add("WebIO")
+
 # precompile the packages ? 
 Pkg.precompile()
 
 using Plots
 using IJulia
+using WebIO
+
