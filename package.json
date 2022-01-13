@@ -53,7 +53,8 @@
       "jlab_server-dist/share/jupyter/labextensions/sos_completer" ,
       "jlab_server-dist/julia/depot" ,
       "jlab_server-dist/julia/install_more.jl" ,
-      "jlab_server-dist/lib"
+      "jlab_server-dist/lib",
+      "jlab_server-dist/wheels" 
     ],
     "linux": {
       "target": [

@@ -71,6 +71,7 @@ echo -e "#!/bin/sh\n\nexport JULIA_DEPOT_PATH='$resdir/jlab_server/julia/depot'"
 echo -e "#!/bin/sh\n\nunset JULIA_DEPOT_PATH" > "$resdir/jlab_server/etc/conda/deactivate.d/env_vars.sh"
 
 # VII - finishes Interact.jl install
-#$resdir/bin/julia "$resdir/jlab_server-dist/julia/install_more.jl" "$resdir/bin/jupyter"
+"$resdir/jlab_server/bin/python3" -m pip install --upgrade "$resdir/jlab_server-dist/wheels/webio_jupyter_extension-0.1.0-py3-none-any.whl"
+"$resdir/bin/julia" "$resdir/jlab_server-dist/julia/install_more.jl" "$resdir/bin/jupyter"
 
 exit 0

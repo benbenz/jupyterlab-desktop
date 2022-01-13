@@ -4,6 +4,7 @@
     "language": "sos",
     "env": {
         "JULIA_DEPOT_PATH":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/julia/depot",
+        "JUPYTER_PATH":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter",
         "JUPYTER_DATA_DIR":"~/Applications/JupyterLab.app/Contents/Resources/jlab_server/share/jupyter" 
     }
 }
