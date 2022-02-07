@@ -45,10 +45,10 @@ RUN conda install -c conda-forge julia=1.6.5
 RUN conda install conda-build
 
 # create conda-env to run the future commands
-RUN conda create --name babelbook python=3.9
-RUN echo "source activate babelbook" >> ~/.bashrc
-ENV PATH /miniconda/envs/babelbook/bin:$PATH
-RUN conda init bash
+#RUN conda create --name babelbook python=3.9
+#RUN echo "source activate babelbook" >> ~/.bashrc
+#ENV PATH /miniconda/envs/babelbook/bin:$PATH
+#RUN conda init bash
 
 # CLEAN some more
 RUN conda clean --all
