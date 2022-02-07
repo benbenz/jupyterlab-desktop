@@ -1,0 +1,70 @@
+# This file is to setup a Linux environment to be able to generate the Linux distribution of Jupyterlab-Babel
+
+#FROM ubuntu:21.04
+FROM ubuntu:21.10
+#FROM ubuntu:20.04
+
+RUN mkdir /app
+WORKDIR /app
+
+USER root
+
+# user stuff
+ENV NB_USER babelbook
+ENV NB_UID 999
+RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER
+
+# required apps
+RUN apt-get update
+RUN apt-get install -y git
+RUN apt-get install -y wget
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y emacs
+#RUN apt-get install -y python3
+#RUN python3 --version
+#RUN apt-get install -y python3-distutils
+#RUN wget https://bootstrap.pypa.io/get-pip.py
+#RUN python3 get-pip.py
+
+# install conda
+ARG INSTALL_ROOT=/miniconda
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p /miniconda
+ENV PATH=/miniconda/bin:/miniconda/condabin:$PATH
+
+# used by JupyterLab-Desktop
+RUN conda install python=3.9
+RUN conda install -c conda-forge constructor
+RUN conda install -c conda-forge nodejs=16
+RUN npm install --global yarn
+RUN npm i -g rimraf
+RUN npm install -g typescript 
+# used to collect the depot
+RUN conda install -c conda-forge julia=1.6.5
+# used to create the sos-stata conda package
+RUN conda install conda-build
+
+# create conda-env to run the future commands
+RUN conda create --name babelbook python=3.9
+RUN echo "source activate babelbook" >> ~/.bashrc
+ENV PATH /miniconda/envs/babelbook/bin:$PATH
+RUN conda init bash
+
+# CLEAN some more
+RUN conda clean --all
+RUN rm -Rf /root/.cache/pip
+
+# switch user
+WORKDIR /home/${NB_USER}
+USER $NB_USER
+RUN conda init bash
+RUN echo "source activate babelbook" >> ~/.bashrc
+
+#RUN su -
+#RUN apt-get install sudo -y
+#usermod -aG sudo root
+#usermod -aG sudo babelbook
+
+EXPOSE 8888
+
+#ENTRYPOINT ["/home/babelbook/start.sh"]
