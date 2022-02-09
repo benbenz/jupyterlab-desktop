@@ -30,3 +30,5 @@ env_installer/JupyterLabDesktopAppServer-*.sh
 
 jlab_server-dist/julia/depot
 !jlab_server-dist/lib
+
+JupyterLab.rpm.tar

@@ -43,7 +43,7 @@ specs:
   # 1.12.2 doesn't seem to work well
   - stata_kernel 1.12.1
   # from pypi > conda (using skeleton and conda-build)
-  - file:///app/install/jlab_server-dist/wheels/sos-stata-0.18.0-py38_0.tar.bz2
+  - file:///miniconda/conda-bld/linux-64/sos-stata-0.18.0-py38_0.tar.bz2
 
 default_prefix: "%HOMEDRIVE%\\JupyterLab\\resources\\jlab_server"
 default_prefix_all_users: "%HOMEDRIVE%\\JupyterLab\\resources\\jlab_server"

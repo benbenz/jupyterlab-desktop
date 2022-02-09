@@ -12,6 +12,11 @@ COPY *.js .
 COPY *.json . 
 COPY tbump.toml .
 COPY user-guide.md .
+COPY linux_cgroups.sh .
+COPY linux_finish.sh .
+COPY LICENSE .
+COPY README.md .
+COPY Release.md .
 COPY dist-resources dist-resources
 COPY electron-builder-scripts electron-builder-scripts
 COPY env_installer/construct-linux.yaml env_installer/construct.yaml
@@ -30,11 +35,11 @@ RUN conda install -c conda-forge jupyterlab=3.2.1
 RUN conda install -c conda-forge sos 
 RUN conda install -c conda-forge sos-notebook
 RUN conda skeleton pypi sos-stata
-#RUN conda build sos-stata
+RUN conda build -c conda-forge sos-stata
 
 # main JupyterLab Desktop building commands (+ Julia depot)
-#RUN npm install
-#RUN yarn run clean && yarn build
-#RUN yarn create_env_installer:linux
-#RUN yarn julia_depot
-#RUN yarn dist:linux
+RUN npm install
+RUN yarn run clean && yarn build
+RUN yarn julia_depot
+RUN yarn create_env_installer:linux
+RUN yarn dist:linux

@@ -1,8 +1,14 @@
 # This file is to setup a Linux environment to be able to generate the Linux distribution of Jupyterlab-Babel
 
 #FROM ubuntu:21.04
-FROM ubuntu:21.10
+#FROM ubuntu:21.10
 #FROM ubuntu:20.04
+# use 'bionic' for easier cgroup handling ...
+# https://medium.com/@asishrs/docker-limit-resource-utilization-using-cgroup-parent-72a646651f9d
+#FROM ubuntu:18.04
+
+# Use Jammy so cgroup-tools is in v2
+FROM ubuntu:22.04
 
 RUN mkdir /app
 WORKDIR /app
@@ -18,6 +24,10 @@ RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER
 RUN apt-get update
 RUN apt-get install -y git
 RUN apt-get install -y wget
+RUN apt-get install -y htop
+RUN apt-get install -y cgroup-tools
+RUN apt-get install -y build-essential ksh
+RUN apt-get install -y rpm  
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y emacs
 #RUN apt-get install -y python3
@@ -33,7 +43,7 @@ RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p /miniconda
 ENV PATH=/miniconda/bin:/miniconda/condabin:$PATH
 
 # used by JupyterLab-Desktop
-RUN conda install python=3.9
+RUN conda install python=3.8
 RUN conda install -c conda-forge constructor
 RUN conda install -c conda-forge nodejs=16
 RUN npm install --global yarn
@@ -58,7 +68,15 @@ RUN rm -Rf /root/.cache/pip
 WORKDIR /home/${NB_USER}
 USER $NB_USER
 RUN conda init bash
-RUN echo "source activate babelbook" >> ~/.bashrc
+#RUN echo "source activate babelbook" >> ~/.bashrc
+
+# prepare the cgroup
+USER root
+#WORKDIR /sys/fs/cgroup
+#RUN echo '+memory' > cgroup.subtree_control
+#RUN mkdir cgmain
+#WORKDIR /sys/fs/cgroup/cgmain
+#RUN echo '15032385536' > memory.max
 
 #RUN su -
 #RUN apt-get install sudo -y
