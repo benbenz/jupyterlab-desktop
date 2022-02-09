@@ -4,7 +4,7 @@
 
 # build the ROOT Linux image
 docker build -t linux4jupyterlabbabel --memory=12g --memory-swap=30g -f Dockerfile-linux4jupyterlabbabel .
-# build the 'almost-there' JupyterLab image
+# build the JupyterLab image
 docker build -t jupyterlab-babel --memory=12g --memory-swap=30g .
 
 # create the container
