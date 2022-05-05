@@ -3,7 +3,9 @@ build
 dist
 lib
 node_modules
+.npmrc
 .cache
+.eslintcache
 .vscode/*
 !.vscode/launch.json
 *.py[co]
@@ -19,8 +21,9 @@ __pycache__
 *.swp
 *.map
 .idea/
-
 *.log
+
+package.lock.json
 
 env_installer/tmp
 env_installer/.ipynb_checkpoints

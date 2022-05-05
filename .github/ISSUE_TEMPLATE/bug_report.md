@@ -40,7 +40,7 @@ https://jupyterlab.readthedocs.io/en/latest/getting_started/issue.html
 
 - Operating System and version: <!-- e.g. Linux Ubuntu 21.04 -->
 - JupyterLab-Desktop version: <!-- e.g. 3.1.7-2 -->
-- Installer: <!-- .exe, .deb, .pkg, .rpm, .snap, .flatpak -->
+- Installer: <!-- .exe, .deb, .dmg, .pkg, .rpm, .snap, .flatpak -->
 
 <!--The more content you provide, the more we can help!-->
 
@@ -51,7 +51,7 @@ You may want to sanitize the paths in the output.
 </pre>
 </details>
 
-<details><summary>Browser Output</summary>
+<details><summary>Browser Output (required for interface issues after loading)</summary>
 <!--Go to `Help` menu -> `Open Developer Console` to access the JavaScript console-->
 <!--If you do not see such a menu entry, please try Ctrl + Shift + I, after focusing on JupyterLab file browser-->
 <pre>
@@ -60,3 +60,14 @@ Paste the output from the DevTools JavaScript console here, if applicable.
 </pre>
 </details>
 
+<details><summary>Logs (required for issues with loading, server and startup)</summary>
+<!--Start application from command line as `jlab --verbose 4`, wait until it settles-->
+<!--Copy-paste the logs from the following location:-->
+<!--on Linux: ~/.config/jupyterlab-desktop/logs/main.log-->
+<!--on macOS: ~/Library/Logs/jupyterlab-desktop/main.log-->
+<!--on Windows: %USERPROFILE%\AppData\Roaming\jupyterlab-desktop\logs\main.log-->
+<pre>
+Paste the logs from the `main.log` file here (optionally also from `renderer.log`).
+
+</pre>
+</details>
